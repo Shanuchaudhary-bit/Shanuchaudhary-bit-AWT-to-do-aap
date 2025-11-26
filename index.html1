@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            background: #f2f2f2;
+            margin: 40px;
+        }
+
+        .container{
+            width: 350px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input{
+            width: 70%;
+            padding: 8px;
+        }
+
+        button{
+            padding: 8px 12px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul{
+            margin-top: 20px;
+            padding-left: 0;
+        }
+
+        li{
+            list-style: none;
+            background: #eaeaea;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 6px;
+        }
+
+        .delete-btn{
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <input id="taskInput" type="text" placeholder="Enter task">
+    <button id="addBtn">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    // Add task
+    $("#addBtn").click(function(){
+        let task = $("#taskInput").val().trim();
+
+        if(task === ""){
+            alert("Please enter a task");
+            return;
+        }
+
+        // Add task to list
+        $("#taskList").append(
+            `<li>${task} 
+                <button class='delete-btn'>Delete</button>
+            </li>`
+        );
+
+        $("#taskInput").val(""); // clear input
+    });
+
+    // Delete task (event delegation)
+    $("#taskList").on("click", ".delete-btn", function(){
+        $(this).parent().remove();
+    });
+
+});
+</script>
+
+</body>
+</html>
